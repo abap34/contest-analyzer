@@ -15,15 +15,17 @@ export const fetchHistory = async (formData: FormData) => {
   }[] = await fetch(
     `https://atcoder.jp/users/${formData.get("username")}/history/json`
   ).then((res) => res.json());
+  // isRated が false のものを除外
+  const rated = history.filter((d) => d.IsRated);
 
   // data の "ContestScreenName" に "abc"　が含まれるものを抽出
-  const abc = history.filter((d) => d.ContestScreenName.includes("abc"));
+  const abc = rated.filter((d) => d.ContestScreenName.includes("abc"));
   // "arc" が入っているものを抽出
-  const arc = history.filter((d) => d.ContestScreenName.includes("arc"));
+  const arc = rated.filter((d) => d.ContestScreenName.includes("arc"));
   // "agc" が入っているものを抽出
-  const agc = history.filter((d) => d.ContestScreenName.includes("agc"));
+  const agc = rated.filter((d) => d.ContestScreenName.includes("agc"));
   // それ以外
-  const other = history.filter(
+  const other = rated.filter(
     (d) =>
       !d.ContestScreenName.includes("abc") &&
       !d.ContestScreenName.includes("arc") &&
