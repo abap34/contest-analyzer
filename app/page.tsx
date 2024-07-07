@@ -71,7 +71,7 @@ export default function Home() {
           })}
         >
           <input
-            placeholder="abap"
+            placeholder="tourist"
             name="username"
             className={css({
               border: "2px solid token(colors.gray.200)",
